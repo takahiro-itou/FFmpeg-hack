@@ -292,6 +292,9 @@ static int asf_read_file_properties(AVFormatContext *s)
     asf->hdr.max_bitrate = avio_rl32(pb);
     s->packet_size       = asf->hdr.max_pktsize;
 
+    av_log(s, AV_LOG_INFO, "asf->hdr.max_bitrate = %d\n",
+           asf->hdr.max_bitrate);
+
     return 0;
 }
 
