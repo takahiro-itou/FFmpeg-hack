@@ -494,6 +494,10 @@ static int asf_write_header1(AVFormatContext *s, int64_t file_size,
             int64_t es_pos;
             if (asf->streams[n].stream_language_index > 127)
                 continue;
+
+            av_log(s, AV_LOG_INFO, "s->streams[%d]->codecpar->bit_rate = %d\n",
+                   n,  s->streams[n]->codecpar->bit_rate);
+
             es_pos = put_header(pb, &ff_asf_extended_stream_properties_object);
             avio_wl64(pb, 0); /* start time */
             avio_wl64(pb, 0); /* end time */
