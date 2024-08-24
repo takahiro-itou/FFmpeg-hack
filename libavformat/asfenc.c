@@ -769,6 +769,7 @@ static int asf_write_header(AVFormatContext *s)
     /* the data-chunk-size has to be 50 (DATA_HEADER_SIZE), which is
      * data_size - asf->data_offset at the moment this function is done.
      * It is needed to use asf as a streamable format. */
+    av_log(s, AV_LOG_INFO, "PASS : %s, %d\n", __FILE__, __LINE__);
     if ((ret = asf_write_header1(s, 0, DATA_HEADER_SIZE)) < 0)
         return ret;
 
@@ -789,6 +790,7 @@ static int asf_write_stream_header(AVFormatContext *s)
 
     asf->is_streamed = 1;
 
+    av_log(s, AV_LOG_INFO, "PASS : %s, %d\n", __FILE__, __LINE__);
     return asf_write_header(s);
 }
 
@@ -1103,6 +1105,7 @@ static int asf_write_trailer(AVFormatContext *s)
         /* rewrite an updated header */
         file_size = avio_tell(s->pb);
         avio_seek(s->pb, 0, SEEK_SET);
+        av_log(s, AV_LOG_INFO, "PASS : %s, %d\n", __FILE__, __LINE__);
         asf_write_header1(s, file_size, data_size - asf->data_offset);
     }
 
