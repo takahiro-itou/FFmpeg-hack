@@ -693,6 +693,8 @@ static int asf_read_marker(AVFormatContext *s)
 
 static int asf_read_header(AVFormatContext *s)
 {
+    av_log(s, AV_LOG_INFO, "PASS asf_read_header %s %d\n", __FILE__, __LINE__);
+
     ASFContext *asf = s->priv_data;
     ff_asf_guid g;
     AVIOContext *pb = s->pb;
@@ -817,6 +819,10 @@ static int asf_read_header(AVFormatContext *s)
         int stream_num = asf->asfid2avid[i];
         if (stream_num >= 0) {
             AVStream *st = s->streams[stream_num];
+            av_log(s, AV_LOG_INFO,
+                   "st->codecpar->bit_rate = %d, asf->stream_bitrates = %d\n",
+                   st->codecpar->bit_rate, asf->stream_bitrates[i]);
+
             if (!st->codecpar->bit_rate)
                 st->codecpar->bit_rate = asf->stream_bitrates[i];
             if (asf->dar[i].num > 0 && asf->dar[i].den > 0) {
