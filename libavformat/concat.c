@@ -49,6 +49,8 @@ struct concat_data {
 
 static av_cold int concat_close(URLContext *h)
 {
+    av_log(h, AV_LOG_INFO, "PASS concat_close : %s %d\n", __FILE__, __LINE__);
+
     int err = 0;
     size_t i;
     struct concat_data  *data  = h->priv_data;
@@ -65,6 +67,8 @@ static av_cold int concat_close(URLContext *h)
 #if CONFIG_CONCAT_PROTOCOL
 static av_cold int concat_open(URLContext *h, const char *uri, int flags)
 {
+    av_log(h, AV_LOG_INFO, "PASS concat_open : %s %d\n", __FILE__, __LINE__);
+
     char *node_uri = NULL;
     int err = 0;
     int64_t size, total_size = 0;
@@ -135,6 +139,8 @@ static av_cold int concat_open(URLContext *h, const char *uri, int flags)
 
 static int concat_read(URLContext *h, unsigned char *buf, int size)
 {
+    av_log(h, AV_LOG_INFO, "PASS concat_read : %s %d\n", __FILE__, __LINE__);
+
     int result, total = 0;
     struct concat_data  *data  = h->priv_data;
     struct concat_nodes *nodes = data->nodes;
@@ -160,6 +166,8 @@ static int concat_read(URLContext *h, unsigned char *buf, int size)
 
 static int64_t concat_seek(URLContext *h, int64_t pos, int whence)
 {
+    av_log(h, AV_LOG_INFO, "PASS concat_seek : %s %d\n", __FILE__, __LINE__);
+
     int64_t result;
     struct concat_data  *data  = h->priv_data;
     struct concat_nodes *nodes = data->nodes;
@@ -211,6 +219,8 @@ const URLProtocol ff_concat_protocol = {
 #if CONFIG_CONCATF_PROTOCOL
 static av_cold int concatf_open(URLContext *h, const char *uri, int flags)
 {
+    av_log(h, AV_LOG_INFO, "PASS concatf_open : %s %d\n", __FILE__, __LINE__);
+
     AVBPrint bp;
     struct concat_data *data = h->priv_data;
     AVIOContext *in = NULL;
