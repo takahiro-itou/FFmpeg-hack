@@ -114,7 +114,7 @@ static int safe_filename(const char *f)
 static int add_file(AVFormatContext *avf, char *filename, ConcatFile **rfile,
                     unsigned *nb_files_alloc)
 {
-    av_log(avf, AV_LOG_INFO, "PASS add_file '%s'\n", __FILE__, __LINE__);
+    av_log(avf, AV_LOG_INFO, "PASS add_file %s %d\n", __FILE__, __LINE__);
 
     ConcatContext *cat = avf->priv_data;
     ConcatFile *file;
@@ -201,7 +201,7 @@ static int copy_stream_props(AVStream *st, AVStream *source_st)
 
 static int detect_stream_specific(AVFormatContext *avf, int idx)
 {
-    av_log(avf, AV_LOG_INFO, "PASS detect_stream_specifice '%s'\n",
+    av_log(avf, AV_LOG_INFO, "PASS detect_stream_specifice %s %d\n",
            __FILE__, __LINE__);
 
     ConcatContext *cat = avf->priv_data;
@@ -246,9 +246,6 @@ static int detect_stream_specific(AVFormatContext *avf, int idx)
 
 static int match_streams_one_to_one(AVFormatContext *avf)
 {
-    av_log(avf, AV_LOG_INFO, "PASS match_streams_one_to_one '%s'\n",
-           __FILE__, __LINE__);
-
     ConcatContext *cat = avf->priv_data;
     AVStream *st;
     int i, ret;
@@ -291,8 +288,6 @@ static int match_streams_exact_id(AVFormatContext *avf)
 
 static int match_streams(AVFormatContext *avf)
 {
-    av_log(avf, AV_LOG_INFO, "PASS match_streams '%s'\n", __FILE__, __LINE__);
-
     ConcatContext *cat = avf->priv_data;
     ConcatStream *map;
     int i, ret;
@@ -343,7 +338,7 @@ static int64_t get_best_effort_duration(ConcatFile *file, AVFormatContext *avf)
 
 static int open_file(AVFormatContext *avf, unsigned fileno)
 {
-    av_log(avf, AV_LOG_INFO, "PASS open_file '%s'\n", __FILE__, __LINE__);
+    av_log(avf, AV_LOG_INFO, "PASS open_file %s %d\n", __FILE__, __LINE__);
 
     ConcatContext *cat = avf->priv_data;
     ConcatFile *file = &cat->files[fileno];
@@ -404,7 +399,7 @@ static int open_file(AVFormatContext *avf, unsigned fileno)
 
 static int concat_read_close(AVFormatContext *avf)
 {
-    av_log(avf, AV_LOG_INFO, "PASS concat_read_close '%s'\n",
+    av_log(avf, AV_LOG_INFO, "PASS concat_read_close %s %d\n",
            __FILE__, __LINE__);
 
     ConcatContext *cat = avf->priv_data;
